@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  <link rel="stylesheet" type='text/css' href='{% static "homepage\home.css" %}?{% now "U" %}'>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <title>{% block title %}Home / Swingrs{% endblock %}</title>
+</head>
+<body>
+  {% csrf_token %}
+  <div id="content">
+    <div class="card-container">
+      {% for card in cards %}
+      <div class="card" style="background-image: url('{{ card.firebase_image_url }}');">
+        <div class="card-content">
+          <h3>{{ card.title }}, {{ card.age }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <div id="no-cards-message" class="no-cards-message">
+        No more users in your area. Please expand your search preferences.
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='navigation'>
+    <nav>
+      <ul>
+        <li class='list active'>
+          <a
+            id="home"
+            hx-get="/home"
+            hx-target="#content"
+            hx-swap="innerHTML"
+          >
+            <span class='icon'>
+              <ion-icon name="home-outline"></ion-icon>
+            </span>
+            <span class='text'>Home</span>
+          </a>
+        </li>
+        <li class='list'>
+          <a
+            id="inbox"
+            hx-get="/inbox"
+            hx-target="#content"
+            hx-swap="innerHTML"
+          >
+            <span class='icon'>
+              <ion-icon name="chatbubbles-outline"></ion-icon>
+            </span>
+            <span class='text'>Inbox</span>
+          </a>
+        </li>
+        <li class='list'>
+          <a
+            id="likes"
+            hx-get="/likes"
+            hx-target="#content"
+            hx-swap="innerHTML"
+          >
+            <span class='icon'>
+              <ion-icon name="heart-outline"></ion-icon>
+            </span>
+            <span class='text'>Likes</span>
+          </a>
+        </li>
+        <li class='list'>
+          <a
+            id="venues"
+            hx-get="/venues"
+            hx-target="#content"
+            hx-swap="innerHTML"
+          >
+            <span class='icon'>
+              <ion-icon name="golf-outline"></ion-icon>
+            </span>
+            <span class='text'>Venues</span>
+          </a>
+        </li>
+        <li class='list'>
+          <a
+            id="user"
+            hx-get="/user"
+            hx-target="#content"
+            hx-swap="innerHTML"
+          >
+            <span class='icon'>
+              <ion-icon name="person-outline"></ion-icon>
+            </span>
+            <span class='text'>User</span>
+          </a>
+        </li>
+        <div class='indicator'></div>
+      </ul>
+    </nav>
+  </div>
+  <script>
+    const navLinks = document.querySelectorAll('.navigation .list a');
+    const navItems = document.querySelectorAll('.navigation .list');
+    navLinks.forEach((link) => {
+        link.addEventListener('click', function () {
+            navItems.forEach((item) => {
+                item.classList.remove('active');
+            });
+            this.closest('.list').classList.add('active');
+        });
+    });
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script>
+  function initializeCards() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+          if (card.dataset.hammerInitialized) return;
+          card.dataset.hammerInitialized = true;
+          const hammer = new Hammer(card);
+          hammer.on('pan', function(ev) {
+              card.style.transform =
+                  `translate(${ev.deltaX}px, ${ev.deltaY}px)
+                  rotate(${ev.deltaX / 10}deg)`;
+          });
+          hammer.on('panend', function(ev) {
+              const threshold = 100;
+              if (
+                  Math.abs(ev.deltaX) > threshold ||
+                  ev.deltaY < -threshold
+              ) {
+                  if (ev.deltaX > threshold) {
+                      card.classList.add('swipe-right');
+                  } else if (ev.deltaX < -threshold) {
+                      card.classList.add('swipe-left');
+                  } else if (ev.deltaY < -threshold) {
+                      card.classList.add('swipe-up');
+                  }
+                  card.style.transform = '';
+                  card.addEventListener('transitionend', () => {
+                      card.remove();
+                      if (
+                          document.querySelectorAll('.card').length === 0
+                      ) {
+                          const container =
+                              document.querySelector('.card-container');
+                          const message =
+                              document.createElement('div');
+                          message.classList.add(
+                              'no-cards-message'
+                          );
+                          message.innerHTML =
+                              'No more users in your area.<br>Please expand your search preferences.';
+                          container.appendChild(message);
+                      }
+                  }, { once: true });
+              } else {
+                  card.style.transform = '';
+              }
+          });
+      });
+  }
+  initializeCards();
+  document.body.addEventListener('htmx:afterSwap', function() {
+      initializeCards();
+  });
+  </script>
+</body>
+</html>
