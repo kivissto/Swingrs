@@ -51,22 +51,24 @@ def signIn(request):
 
 
 def home(request):
-    cards = Card.objects.all()
-    firebase_users = {}
+    users = []
     try:
         firebase_data = firebase.database().child("Users").get().val()
-        if firebase_data:
-            firebase_users = firebase_data
-    except Exception as e:
-        firebase_users = {}
+        print("FIREBASE DATA:", firebase_data)
 
-    for card in cards:
-        matched_user = next((user for user in firebase_users.values() if user.get('name') == card.title), None)
-        if matched_user:
-            card.firebase_image_url = matched_user.get('photoUrl')
-        else:
-            card.firebase_image_url = None
-    return render(request, 'homepage/home.html', {'cards': cards})
+        if firebase_data:
+            for user_id, user in firebase_data.items():
+                users.append({
+                    "id": user_id,
+                    "name": user.get("name", ""),
+                    "age": user.get("age", ""),
+                    "bio": user.get("bio", ""),
+                    "photoUrl": user.get("photoUrl", ""),
+                    "gender": user.get("gender", "")
+                })
+    except Exception as e:
+        print("Firebase error:", e)
+    return render(request, "homepage/home.html", {"users": users})
 
 def likeCard(request, card_id):
     if request.method == 'POST':
@@ -87,7 +89,22 @@ def superlikeCard(request, card_id):
         return JsonResponse({'status': 'disliked'})
 
 def inbox(request):
-    return render(request, 'homepage/inbox.html')
+    users = []
+    try:
+        firebase_data = firebase.database().child("Users").get().val()
+        if firebase_data:
+            for user_id, user in firebase_data.items():
+                users.append({
+                    "id": user_id,
+                    "name": user.get("name", ""),
+                    "age": user.get("age", ""),
+                    "bio": user.get("bio", ""),
+                    "photoUrl": user.get("photoUrl", ""),
+                    "gender": user.get("gender", "")
+                })
+    except Exception as e:
+        print("Firebase inbox error:", e)
+    return render(request, "homepage/inbox.html", {"users": users})
 
 def likes(request):
     return render(request, 'homepage/likes.html')
