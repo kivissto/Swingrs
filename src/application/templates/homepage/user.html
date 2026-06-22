@@ -4,58 +4,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'homepage/user.css' %}?{% now 'U' %}">
+
   <title>User / Swingrs</title>
 </head>
-<body>
-  <main class="page">
-    <div class="profile-card">
-      <div class="profile-avatar">
-        <ion-icon name="person-outline"></ion-icon>
-      </div>
-      <h1>Your Profile</h1>
-      <p>Profile settings, photos, and preferences will appear here.</p>
 
-      <button class="profile-btn">Edit Profile</button>
+<body>
+  <main class="user-page">
+    <div class="user-container">
+
+      <header class="user-top">
+        <div class="profile-area">
+          <img class="profile-picture" src="{{ user_photo|default:'/static/default.jpg' }}" alt="Profile picture">
+
+          <a href="/edit-profile" class="edit-profile-btn">
+            Edit Profile
+          </a>
+        </div>
+
+        <a href="/settings" class="settings-btn">
+          <ion-icon name="settings-outline"></ion-icon>
+        </a>
+      </header>
+
+      <section class="user-header">
+        <h1>Your Profile</h1>
+        <p>Manage your account features and upgrades.</p>
+      </section>
+
+      <section class="feature-list">
+
+        <a href="/super-likes" class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="star-outline"></ion-icon>
+          </div>
+
+          <div class="feature-info">
+            <h2>Super Likes</h2>
+            <p>Stand out and show extra interest.</p>
+          </div>
+
+          <ion-icon class="arrow-icon" name="chevron-forward-outline"></ion-icon>
+        </a>
+
+        <a href="/boosts" class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="flash-outline"></ion-icon>
+          </div>
+
+          <div class="feature-info">
+            <h2>Available Boosts</h2>
+            <p>Get seen by more people faster.</p>
+          </div>
+
+          <ion-icon class="arrow-icon" name="chevron-forward-outline"></ion-icon>
+        </a>
+
+        <a href="/premium" class="feature-card premium-card">
+          <div class="feature-icon">
+            <ion-icon name="diamond-outline"></ion-icon>
+          </div>
+
+          <div class="feature-info">
+            <h2>Premium</h2>
+            <p>Unlock exclusive profile features.</p>
+          </div>
+
+          <ion-icon class="arrow-icon" name="chevron-forward-outline"></ion-icon>
+        </a>
+
+      </section>
+
     </div>
   </main>
 
   <div class="navigation">
     <nav>
       <ul>
-        <li>
+        <li class="list">
           <a href="/home">
             <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
             <span class="text">Home</span>
           </a>
         </li>
-        <li>
+
+        <li class="list">
           <a href="/inbox">
             <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
             <span class="text">Inbox</span>
           </a>
         </li>
-        <li>
+
+        <li class="list">
           <a href="/likes">
             <span class="icon"><ion-icon name="heart-outline"></ion-icon></span>
             <span class="text">Likes</span>
           </a>
         </li>
-        <li>
+
+        <li class="list">
           <a href="/venues">
             <span class="icon"><ion-icon name="golf-outline"></ion-icon></span>
             <span class="text">Venues</span>
           </a>
         </li>
-        <li class="active">
+
+        <li class="list active">
           <a href="/user">
             <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
             <span class="text">User</span>
-          </a></li>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

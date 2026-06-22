@@ -12,4 +12,11 @@ urlpatterns = [
     path('user', views.user, name='user'),
     path('like/<int:card_id>/', views.likeCard, name='like_card'),
     path('superlike/<int:card_id>/', views.superlikeCard, name='superlike_card'),
+    path('messages/<str:user_id>/', views.message_detail, name='message_detail'),
+    path('logout', views.logout_view, name='logout'),
+    path('edit-profile', views.edit_profile, name='edit_profile'),
+    path('settings/', views.settings, name='settings'),
+    path('super-likes/', views.super_likes, name='super_likes'),
+    path('boosts/', views.boosts, name='boosts'),
+    path('premium/', views.premium, name='premium'),
   ]

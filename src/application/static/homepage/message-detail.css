@@ -1,0 +1,117 @@
+:root {
+  --primary-color: #22a420;
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --gray-color: #808080;
+  --dark-color: #222327;
+  --light-bg: #f7f7f7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--light-bg);
+  overflow-x: hidden;
+}
+
+.chat-page {
+  min-height: 100vh;
+  padding: 40px 20px 130px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 460px;
+}
+
+.chat-header {
+  width: 100%;
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  padding: 14px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+}
+
+.chat-header img {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  flex-shrink: 0;
+  background: #ddd;
+}
+
+.chat-header h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #111;
+}
+
+.chat-messages {
+  min-height: 480px;
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: #f1f1f1;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+}
+
+.chat-input button {
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+}

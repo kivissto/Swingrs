@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'homepage/message-detail.css' %}?{% now 'U' %}">
+    <title>Messages / Swingrs</title>
+<body>
+
+  <main class="chat-page">
+    <div class="chat-container">
+      <a href="/inbox" class="back-link">
+        ← Back
+      </a>
+
+      <div class="chat-header">
+        <img src="{{ selected_user.photoUrl }}" alt="{{ selected_user.name }}">
+            <h2>{{ selected_user.name }}</h2>
+      </div>
+
+      <div class="chat-messages">
+        <!-- messages go here -->
+      </div>
+
+      <div class="chat-input">
+        <input type="text" placeholder="Type a message...">
+        <button>Send</button>
+      </div>
+
+    </div>
+</main>
+
+</body>
+</html>

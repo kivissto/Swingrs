@@ -106,6 +106,31 @@ def inbox(request):
         print("Firebase inbox error:", e)
     return render(request, "homepage/inbox.html", {"users": users})
 
+def message_detail(request, user_id):
+    selected_user = None
+
+    try:
+        firebase_data = firebase.database().child("Users").get().val()
+
+        if firebase_data and user_id in firebase_data:
+            user = firebase_data[user_id]
+
+            selected_user = {
+                "id": user_id,
+                "name": user.get("name", ""),
+                "bio": user.get("bio", ""),
+                "photoUrl": user.get("photoUrl", "")
+            }
+
+    except Exception as e:
+        print("Message detail error:", e)
+
+    return render(
+        request,
+        "homepage/message-detail.html",
+        {"selected_user": selected_user}
+    )
+
 def likes(request):
     return render(request, 'homepage/likes.html')
 
@@ -114,3 +139,22 @@ def venues(request):
 
 def user(request):
     return render(request, 'homepage/user.html')
+
+def edit_profile(request):
+    return render(request, 'homepage/edit-profile.html')
+
+def settings(request):
+    return render(request, 'homepage/settings.html')
+
+def super_likes(request):
+    return render(request, 'homepage/super-likes.html')
+
+def boosts(request):
+    return render(request, 'homepage/boosts.html')
+
+def premium(request):
+    return render(request, 'homepage/premium.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('landing')

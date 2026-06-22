@@ -27,7 +27,7 @@
 
       <div class="message-list">
         {% for user in users %}
-          <a href="#" class="message-user">
+          <a href="{% url 'message_detail' user.id %}" class="message-user">
             <img class="message-avatar" src="{{ user.photoUrl }}" alt="{{ user.name }}">
 
             <div class="message-info">

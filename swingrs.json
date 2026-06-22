@@ -1,0 +1,65 @@
+{
+  "Conversations": {
+    "user1121_user5422": {
+      "lastMessage": "Hey there!",
+      "lastTimestamp": 1782100005,
+      "messages": {
+        "-Oabc123": {
+          "sender": "user1121",
+          "text": "Hello!",
+          "timestamp": 1782100000
+        },
+        "-Oabc124": {
+          "sender": "user5422",
+          "text": "Hey there!",
+          "timestamp": 1782100005
+        }
+      }
+    }
+  },
+  "Matches": {
+    "user1121": {
+      "user5422": true
+    },
+    "user5422": {
+      "user1121": true
+    }
+  },
+  "Users": {
+    "user1121": {
+      "age": 28,
+      "bio": "Anyone in the Tampa area?",
+      "gender": "Female",
+      "name": "Jane Smith",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/swingrs-django.firebasestorage.app/o/user1.jpg?alt=media&token=95da5cf7-8732-4660-b800-4ecf77a4ccae"
+    },
+    "user5422": {
+      "age": 26,
+      "bio": "Loser buys the winner a new driver?",
+      "gender": "Female",
+      "name": "Mikayla Michaels",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/swingrs-django.firebasestorage.app/o/user2.jpg?alt=media&token=8c4bf260-1012-49ba-8b14-7765f702a107"
+    },
+    "user7573": {
+      "age": 27,
+      "bio": "I need some friends to play with.",
+      "gender": "Female",
+      "name": "Monica Day",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/swingrs-django.firebasestorage.app/o/user3.jpg?alt=media&token=2852f23c-55f9-48a0-be77-c42a1e32391d"
+    },
+    "user8082": {
+      "age": 25,
+      "bio": "I used to play for USF.",
+      "gender": "Female",
+      "name": "Amanda Miller",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/swingrs-django.firebasestorage.app/o/user4.jpg?alt=media&token=7706bf08-f367-4f7a-874a-b41541914fc4"
+    },
+    "user9390": {
+      "age": 24,
+      "bio": "I wanted to give this a try.",
+      "gender": "Female",
+      "name": "Paige Wells",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/swingrs-django.firebasestorage.app/o/user5.jpg?alt=media&token=63da3b1f-327a-4e6d-865e-6aa275a2dfac"
+    }
+  }
+}
